@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Работа с массивами данных</title>
+  </head>
+
+  <body>
+    <script>
+      // Вся работа данного урока проводится в консоли браузера Google Chrome
+      // ## Работа с массивами данных
+
+      // Наши данные
+
+      const presidents = [
+        { first: "George", last: "Washington", born: 1732, died: 1799 },
+        { first: "John", last: "Adams", born: 1735, died: 1826 },
+        { first: "Ronald", last: "Reagan", born: 1911, died: 2004 },
+        { first: "Gerald", last: "Ford", born: 1913, died: 2006 },
+        { first: "Richard", last: "Nixon", born: 1913, died: 1994 },
+        { first: "John F.", last: "Kennedy", born: 1917, died: 1963 },
+        { first: "Harry S.", last: "Truman", born: 1884, died: 1972 },
+        { first: "Grover", last: "Cleveland", born: 1837, died: 1908 },
+        { first: "Chester A.", last: "Arthur", born: 1829, died: 1886 },
+        { first: "Abraham", last: "Lincoln", born: 1809, died: 1865 },
+        { first: "Franklin", last: "Pierce", born: 1804, died: 1869 },
+        { first: "Lyndon B.", last: "Johnson", born: 1908, died: 1973 },
+        { first: "Dwight D.", last: "Eisenhower", born: 1890, died: 1969 },
+      ];
+
+      const writers = [
+        "Василий, Жуковский",
+        "Александр, Грибоедов",
+        "Александр, Пушкин",
+        "Владимир, Даль",
+        "Николай, Языков",
+        "Федор, Тютчев",
+        "Николай, Гоголь",
+        "Алексей, Кольцов",
+        "Александр, Герцен",
+        "Иван, Гончаров",
+        "Михаил, Лермонтов",
+        "Пётр, Ершов",
+        "Алексей, Толстой",
+        "Даниил, Заточник",
+        "Александр, Радищев",
+        "Евгений, Баратынский",
+        "Петр, Вяземский",
+        "Александр, Бестужев-Марлинский",
+        "Михаил, Загоскин",
+        "Сергей, Аксаков",
+        "Владимир, Одоевский",
+        "Григорий, Данилевский",
+        "Алексей, Писемский",
+        "Дмитрий, Григорович",
+        "Яков, Полонский",
+        "Леонид, Андреев",
+        "Валерий, Брюсов",
+        "Саша, Черный",
+        "Юрий, Трифонов",
+        "Федор, Абрамов",
+        "Дмитрий, Кедрин",
+        "Василий, Шукшин",
+      ];
+
+      // Array.prototype.filter()
+      // 1. Отфильтровать президентов которые родились в 1700-х годах.
+
+      const born1700 = presidents.filter(
+        (president) => president.born >= 1700 && president.born < 1800
+      );
+
+      // console.table(born1700);
+
+      // Array.prototype.map()
+      // 2. Создать массив, который содержит только имя и фамилию каждого президента
+
+      const firstLast = presidents.map(
+        (president) => `${president.first}, ${president.last}`
+      );
+
+      // console.log(firstLast);
+
+      // Array.prototype.sort()
+      // 3. Отсортировать президентов по году рождения - от старшего к младшему
+
+      // 1Й способ записи
+      // const oldest = presidents.sort((a, b) => {
+      //   if (a.born > b.born) {
+      //     return 1;
+      //   } else {
+      //     return -1;
+      //   }
+      // });
+
+      // 2й способ записи
+      const oldest = presidents.sort((a, b) => `${a.born > b.born ? 1 : -1}`);
+
+      // console.table(oldest);
+
+      // Array.prototype.reduce()
+      // 4. Подсчитать общее количество лет жизни всех президентов
+
+      // 1й способ записи
+      // const totalLived = presidents.reduce((total, president) => {
+      //   return total + (president.died - president.born);
+      // }, 0);
+
+      // 2й способ записи
+
+      const totalLived = presidents.reduce(
+        (total, president) => total + (president.died - president.born),
+        0
+      );
+
+      // console.log(totalLived);
+
+      // 5. Отсортировать президентов в зависимости от количества прожитых лет (от большего к меньшему)
+
+      // 1й способ записи
+
+      // const presidentSorted = presidents.sort((a, b) => {
+      //   const aLived = a.died - a.born;
+      //   const bLived = b.died - b.born;
+      //   if (aLived > bLived) {
+      //     return -1;
+      //   } else {
+      //     return 1;
+      //   }
+      // });
+
+      // 2й способ записи
+
+      const presidentSorted = presidents.sort((a, b) => {
+        const aLived = a.died - a.born;
+        const bLived = b.died - b.born;
+        return `${aLived > bLived ? -1 : 1}`;
+      });
+
+      // console.table(presidentSorted);
+
+      // 6. Создать список названий городов (City) и областей (County) Калифорнии содержащих "San"
+      // https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_California
+
+      // const table = document.querySelector(".sortable");
+      // const links = Array.from(
+      //   table.querySelector("tbody").querySelectorAll("a")
+      // );
+
+      // const names = links
+      //   .map((link) => {
+      //     return link.textContent;
+      //   })
+      //   .filter((city) => {
+      //     return city.includes("San");
+      //   });
+      // console.log(names);
+
+      // 7. Упражнение по сортировке
+      // Отсортировать массив "writers" по фамилии в алфавитном порядке
+
+      const writersName = writers.sort((writerA, writerB) => {
+        const [firstA, lastA] = writerA.split(", ");
+        const [firstB, lastB] = writerB.split(", ");
+        return `${lastA > lastB ? 1 : -1}`;
+      });
+      // console.table(writersName);
+
+      // 8. Упражнение по использованию метода Reduce
+      // Подсчитать - сколько раз встречается каждый элемент в массиве
+      const data = [
+        "truck",
+        "car",
+        "car",
+        "truck",
+        "bike",
+        "walk",
+        "car",
+        "van",
+        "bike",
+        "walk",
+        "car",
+        "van",
+        "car",
+        "truck",
+      ];
+
+      const dataCount = data.reduce((objCount, tranport) => {
+        if (!objCount[tranport]) {
+          objCount[tranport] = 0;
+        }
+        objCount[tranport] = objCount[tranport] + 1;
+        return objCount;
+      }, {});
+      // console.log(dataCount);
+
+      // 9. Упражнение по использованию методов .foEach и Object.keys();
+      // Создать массив, который будет содержать только уникальные значения данного массива:
+      const fruits = [
+        "apples",
+        "bananas",
+        "oranges",
+        "apples",
+        "grapes",
+        "bananas",
+        "peaches",
+        "strawberries",
+        "oranges",
+        "apricots",
+        "bananas",
+      ];
+
+      const uniqueFruits = {};
+      fruits.forEach((fruit) => {
+        uniqueFruits[fruit] = true;
+      });
+
+      // console.log(Object.keys(uniqueFruits));
+
+	// ## Основные Методы Массивов - 2
+
+      const people = [
+        { name: "Станислав", year: 2000 },
+        { name: "Василий", year: 1986 },
+        { name: "Александр", year: 1990 },
+        { name: "Владимир", year: 2004 },
+      ];
+
+      const comments = [
+        { text: "Отличный пост!", id: 523423 },
+        { text: "Мне нравится", id: 823423 },
+        { text: "Продолжай в том же духе", id: 2039842 },
+        { text: "Все аццццтой !!!!!", id: 123523 },
+        { text: "Нормально", id: 542328 },
+      ];
+
+      //## Методы Some и Every
+
+      // Array.prototype.some() -> Проверить, что по крайней мере одному из людей исполнилось 16 лет.
+
+      //   const isSixteen = people.some((person) => {
+      //     return new Date().getFullYear() - person.year >= 16;
+      //   });
+
+      const isSixteen = people.some(
+        (person) => new Date().getFullYear() - person.year >= 16
+      );
+      //   console.log(isSixteen);
+
+      // Array.prototype.every() -> Проверить, что каждому из людей исполнилось 16 лет.
+
+      const everySixteen = people.every(
+        (person) => new Date().getFullYear() - person.year >= 16
+      );
+      //   console.log(everySixteen);
+
+      // ## Array.prototype.find() -> Возвращает первый элемент массива, который удовлетворяет нашим требованиям
+
+      // Задача: найти комментарий, c номером ID - 823423
+
+      //   const commentId = comments.find((comment) => {
+      //     return comment.id === 823423;
+      //   });
+
+      const commentId = comments.find((comment) => comment.id === 823423);
+
+      //   console.log(commentId);
+
+      // ## Array.prototype.findIndex() -> Возвращает индекс первого элемента, который удовлетворяет нашим требованиям
+
+      // Задача: удалить из массива комментарий с номером ID 123523
+      // 1. Находим индекс нужного нам комментария
+
+      //   const commentIndex = comments.findIndex((comment) => {
+      //     return comment.id === 123523;
+      //   });
+
+      const commentIndex = comments.findIndex(
+        (comment) => comment.id === 123523
+      );
+
+      //   console.log(commentIndex);
+
+      // 2. Удаляем комментарий из массива (используем метод spice())
+
+      comments.splice(commentIndex, 1);
+      //   console.log(comments);
+
+      // 2.1 Удаляем комментарий из массива (используем метод slice() и оператор spread)
+
+      const commentsOne = comments.slice(0, commentIndex);
+      const commentsTwo = comments.slice(commentIndex, commentIndex + 1);
+      //   console.log(commentsOne);
+      //   console.log(commentsTwo);
+
+      // slice() создает новый массив, куда копирует елементы начиная с индекса старт и до end (не включая end)
+      // используем оператор spread для копирования всех элементов первого и воторого массива в новый массив newComments:
+
+      const commentsFinal = [...commentsOne, ...commentsTwo];
+      //   console.log(commentsFinal);
+
+    </script>
+  </body>
+</html>
